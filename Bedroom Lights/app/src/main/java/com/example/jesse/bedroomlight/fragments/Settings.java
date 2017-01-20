@@ -69,12 +69,7 @@ public class Settings extends Fragment {
         });
 
 
-
-
-
-
         setInputs();
-
 
         Button saveButton = (Button) view.findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +83,9 @@ public class Settings extends Fragment {
                     e.printStackTrace();
                 }
 
-                ((MainActivity)getActivity()).setupConnection(getActivity());
+
+
+                ((MainActivity) getActivity()).setupConnection();
 
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
 
