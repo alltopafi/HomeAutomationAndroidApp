@@ -1,0 +1,120 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/settingsFragment"
+    android:background="@android:color/holo_green_light"
+    android:clickable="true"
+    tools:context="com.example.jesse.bedroomlight.fragments.Settings">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:text="@string/settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:textSize="44sp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/background_light" />
+
+        <EditText
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:id="@+id/ipAddressInput"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="180dp"
+            android:imeOptions="actionDone"
+            android:inputType="number|numberDecimal"
+            android:digits="1234567890."
+            android:maxLines="1"
+            android:background="#D3D3D3" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="400dp"
+            android:layout_marginLeft="250dp"
+            android:text="Save"
+            android:id="@+id/saveButton"
+            android:clickable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Server IP Address:"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@android:color/background_light"
+            android:layout_alignBaseline="@+id/ipAddressInput"
+            android:layout_alignBottom="@+id/ipAddressInput"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:id="@+id/textView4" />
+
+        <EditText
+            android:layout_width="3000dp"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:id="@+id/portNumberInput"
+            android:layout_marginTop="120dp"
+            android:layout_marginLeft="190dp"
+            android:layout_alignRight="@+id/ipAddressInput"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:digits="1234567890"
+            android:maxLines="1"
+            android:maxLength="5"
+            android:background="#D3D3D3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Server Port Number:"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@android:color/background_light"
+            android:layout_alignBaseline="@+id/portNumberInput"
+            android:layout_alignBottom="@+id/ipAddressInput"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:id="@+id/textView5" />
+
+        <EditText
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:id="@+id/clientIDInput"
+            android:layout_marginTop="160dp"
+            android:layout_alignRight="@+id/ipAddressInput"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            android:maxLength="100"
+            android:background="#D3D3D3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Client ID:"
+            android:textSize="18dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="@android:color/background_light"
+            android:layout_alignBaseline="@+id/clientIDInput"
+            android:layout_alignBottom="@+id/ipAddressInput"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:id="@+id/textView6" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>
