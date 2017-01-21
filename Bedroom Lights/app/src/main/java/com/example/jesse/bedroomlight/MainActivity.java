@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 
+import com.example.jesse.bedroomlight.fragments.DevicesFragment;
 import com.example.jesse.bedroomlight.fragments.HomeFragment;
 import com.example.jesse.bedroomlight.fragments.Settings;
 
@@ -59,6 +60,18 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         HomeFragment fragment = new HomeFragment();
+        fragmentTransaction.add(R.id.mainFrame, fragment);
+        fragmentTransaction.commit();
+
+        mDrawerLayout.closeDrawer(Gravity.LEFT);
+    }
+
+    public void devicesButtonClicked(MenuItem item){
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        DevicesFragment fragment = new DevicesFragment();
         fragmentTransaction.add(R.id.mainFrame, fragment);
         fragmentTransaction.commit();
 

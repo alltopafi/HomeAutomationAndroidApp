@@ -1,0 +1,16 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jesse.bedroomlight.fragments.DevicesFragment"
+    android:id="@+id/device_fragment_layout"
+    android:background="#d6d7d7">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/devicesList"
+        android:layout_height="match_parent" />
+
+</FrameLayout>
