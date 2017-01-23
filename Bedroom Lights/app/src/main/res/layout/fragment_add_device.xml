@@ -18,13 +18,13 @@
             android:text="@string/addDevice"
             android:textSize="22dp"
             android:layout_marginLeft="130dp"
-            android:layout_marginTop="100dp"/>
+            android:layout_marginTop="80dp"/>
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/imageViewSelector"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="120dp"
             android:layout_marginLeft="30dp"
             android:src="@mipmap/add_image"
             android:clickable="true"
@@ -39,7 +39,7 @@
             android:maxLength="70"
             android:maxLines="1"
             android:background="#D3D3D3"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="140dp"
             android:layout_marginLeft="150dp"/>
 
         <EditText
@@ -51,7 +51,7 @@
             android:maxLength="70"
             android:maxLines="1"
             android:background="#D3D3D3"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="180dp"
             android:layout_marginLeft="150dp"/>
 
         <Button
@@ -60,7 +60,7 @@
             android:id="@+id/createDeviceButton"
             android:text="Create Device"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="280dp"/>
+            android:layout_marginTop="240dp"/>
 
 
     </RelativeLayout>
