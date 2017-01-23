@@ -9,7 +9,7 @@ public class Device {
     private String name;
     private int state;
     private String mqttTopic;
-    private int image;
+    private byte[] image;
 
     public Device(String name, String mqttTopic){
         this.name = name;
@@ -17,18 +17,18 @@ public class Device {
         state = 0;
     }
 
-    public Device(String name, String mqttTopic, int image){
+    public Device(String name, String mqttTopic, byte[] image){
         this.name = name;
         this.mqttTopic = mqttTopic;
         this.image = image;
         state = 0;
     }
 
-    public int getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

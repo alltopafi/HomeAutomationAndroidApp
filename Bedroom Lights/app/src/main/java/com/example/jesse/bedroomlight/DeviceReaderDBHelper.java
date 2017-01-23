@@ -17,7 +17,7 @@ public class DeviceReaderDBHelper extends SQLiteOpenHelper {
             DeviceReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
             DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME + " TEXT," +
             DeviceReaderContract.FeedEntry.COLUMN_NAME_TOPIC + " TEXT,"+
-            DeviceReaderContract.FeedEntry.COLUMN_NAME_IMAGE + " TEXT)";
+            DeviceReaderContract.FeedEntry.COLUMN_NAME_IMAGE + " BLOB)";
 
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS "
             + DeviceReaderContract.FeedEntry.TABLE_NAME;
@@ -28,6 +28,7 @@ public class DeviceReaderDBHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(SQL_CREATE_ENTRIES);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

@@ -1,6 +1,8 @@
 package com.example.jesse.bedroomlight;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +74,15 @@ public class DevicesManager extends ArrayAdapter {
 
 
 
-        deviceImageView.setImageResource(devices.get(position).getImage());
+        //deviceImageView.setImageResource(devices.get(position).getImage());
+
+        if(devices.get(position).getImage() != null) {
+            byte[] bytes = devices.get(position).getImage();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            deviceImageView.setImageBitmap(bitmap);
+        }
+
+
         deviceNameTextView.setText(devices.get(position).getName());
         deviceTopicTextView.setText(devices.get(position).getMqttTopic());
 

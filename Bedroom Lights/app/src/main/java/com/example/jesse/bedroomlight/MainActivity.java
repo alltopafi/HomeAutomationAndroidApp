@@ -247,8 +247,8 @@ public ArrayList<Device> getDevicesList(){
         while(cursor.moveToNext()) {
             String name = cursor.getString(cursor.getColumnIndexOrThrow(DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME));
             String topic = cursor.getString(cursor.getColumnIndexOrThrow(DeviceReaderContract.FeedEntry.COLUMN_NAME_TOPIC));
-
-            devicesList.add(new Device(name, topic));
+            byte[] image = cursor.getBlob(cursor.getColumnIndexOrThrow(DeviceReaderContract.FeedEntry.COLUMN_NAME_IMAGE));
+            devicesList.add(new Device(name, topic,image));
         }
         cursor.close();
 

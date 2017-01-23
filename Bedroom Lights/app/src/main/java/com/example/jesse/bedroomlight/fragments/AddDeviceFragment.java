@@ -4,10 +4,13 @@ package com.example.jesse.bedroomlight.fragments;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +25,8 @@ import com.example.jesse.bedroomlight.DeviceReaderDBHelper;
 import com.example.jesse.bedroomlight.DevicesManager;
 import com.example.jesse.bedroomlight.MainActivity;
 import com.example.jesse.bedroomlight.R;
+
+import java.io.ByteArrayOutputStream;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -97,7 +102,7 @@ public class AddDeviceFragment extends Fragment {
         ContentValues values = new ContentValues();
         values.put(DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME, name);
         values.put(DeviceReaderContract.FeedEntry.COLUMN_NAME_TOPIC, topic);
-        values.put(DeviceReaderContract.FeedEntry.COLUMN_NAME_IMAGE,"");
+        values.put(DeviceReaderContract.FeedEntry.COLUMN_NAME_IMAGE,imageViewToByteArray(addImage));
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(DeviceReaderContract.FeedEntry.TABLE_NAME, null, values);
@@ -105,6 +110,17 @@ public class AddDeviceFragment extends Fragment {
         Toast.makeText(getActivity(),"saved device",Toast.LENGTH_SHORT).show();
 
         //TODO remove the fragment from view...show the devices fragment
+    }
+
+    private byte[] imageViewToByteArray(ImageView imageView){
+
+        imageView.buildDrawingCache();
+        Bitmap bitmap = imageView.getDrawingCache();
+
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,100,os);
+        byte[] bytes = os.toByteArray();
+        return bytes;
     }
 
 }

@@ -26,7 +26,7 @@ public class EditDeviceFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_edit_device, container, false);
         //TODO this will be the view to edit/delete a device need to get the information for the device we are editing
-        
+
 
 
 
