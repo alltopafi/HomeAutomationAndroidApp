@@ -1,7 +1,9 @@
 package com.example.jesse.bedroomlight.fragments;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -15,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.jesse.bedroomlight.Device;
+import com.example.jesse.bedroomlight.DeviceReaderContract;
+import com.example.jesse.bedroomlight.DeviceReaderDBHelper;
 import com.example.jesse.bedroomlight.DevicesManager;
 import com.example.jesse.bedroomlight.MainActivity;
 import com.example.jesse.bedroomlight.R;
@@ -84,8 +88,23 @@ public class AddDeviceFragment extends Fragment {
 
     private void saveDevice(String name, String topic){
 
-        MainActivity activity = (MainActivity) getActivity();
-        activity.getDevicesList().add(new Device(name,topic));
+        DeviceReaderDBHelper dbHelper = new DeviceReaderDBHelper(getActivity());
+
+        // Gets the data repository in write mode
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // Create a new map of values, where column names are the keys
+        ContentValues values = new ContentValues();
+        values.put(DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME, name);
+        values.put(DeviceReaderContract.FeedEntry.COLUMN_NAME_TOPIC, topic);
+        values.put(DeviceReaderContract.FeedEntry.COLUMN_NAME_IMAGE,"");
+
+        // Insert the new row, returning the primary key value of the new row
+        long newRowId = db.insert(DeviceReaderContract.FeedEntry.TABLE_NAME, null, values);
+
+        Toast.makeText(getActivity(),"saved device",Toast.LENGTH_SHORT).show();
+
+        //TODO remove the fragment from view...show the devices fragment
     }
 
 }

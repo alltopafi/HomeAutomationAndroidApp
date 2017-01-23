@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,6 +60,13 @@ public class DevicesManager extends ArrayAdapter {
                     //turn off the device
                     powerController.pubOff(devices.get(position).getMqttTopic());
                 }
+            }
+        });
+
+        deviceImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"Edit " + devices.get(position).getName(),Toast.LENGTH_SHORT).show();
             }
         });
 

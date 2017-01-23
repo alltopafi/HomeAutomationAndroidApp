@@ -2,9 +2,11 @@ package com.example.jesse.bedroomlight;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -32,6 +34,7 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.security.AccessController.getContext;
 
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private MqttClient client;
     private ArrayList<Device> devicesList;
+    private DeviceReaderDBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,9 +209,55 @@ public class MainActivity extends AppCompatActivity {
     }
 
 public ArrayList<Device> getDevicesList(){
+    readDbForDevices(getApplicationContext());
     return devicesList;
 }
 
+    private void readDbForDevices(Context context){
+        dbHelper = new DeviceReaderDBHelper(context);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
+// Define a projection that specifies which columns from the database
+// you will actually use after this query.
+        String[] projection = {
+                DeviceReaderContract.FeedEntry._ID,
+                DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME,
+                DeviceReaderContract.FeedEntry.COLUMN_NAME_TOPIC,
+                DeviceReaderContract.FeedEntry.COLUMN_NAME_IMAGE
+        };
+
+// Filter results WHERE "title" = 'My Title'
+//        String selection = DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME + " = ?";
+//        String[] selectionArgs = { "%" };
+
+// How you want the results sorted in the resulting Cursor
+        String sortOrder =
+                DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME + " DESC";
+
+        Cursor cursor = db.query(
+                DeviceReaderContract.FeedEntry.TABLE_NAME,                     // The table to query
+                projection,                               // The columns to return
+                null,                                // The columns for the WHERE clause
+                null,                            // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrder                                 // The sort order
+        );
+
+        while(cursor.moveToNext()) {
+            String name = cursor.getString(cursor.getColumnIndexOrThrow(DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME));
+            String topic = cursor.getString(cursor.getColumnIndexOrThrow(DeviceReaderContract.FeedEntry.COLUMN_NAME_TOPIC));
+
+            devicesList.add(new Device(name, topic));
+        }
+        cursor.close();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        dbHelper.close();
+        super.onDestroy();
+    }
 
 }
