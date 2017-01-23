@@ -11,7 +11,6 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:clickable="true"
             android:id="@+id/deviceImageView" />
 
     </FrameLayout>

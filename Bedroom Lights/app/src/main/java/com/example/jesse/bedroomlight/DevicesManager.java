@@ -1,5 +1,8 @@
 package com.example.jesse.bedroomlight;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +16,9 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.jesse.bedroomlight.fragments.EditDeviceFragment;
+import com.example.jesse.bedroomlight.fragments.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +52,8 @@ public class DevicesManager extends ArrayAdapter {
             convertView = inflater.inflate(resource,null);
         }
 
+        convertView.setClickable(true);
+        convertView.setFocusable(true);
         ImageView deviceImageView = (ImageView)convertView.findViewById(R.id.deviceImageView);
         TextView deviceNameTextView = (TextView)convertView.findViewById(R.id.deviceNameTextView);
         TextView deviceTopicTextView = (TextView)convertView.findViewById(R.id.deviceTopicTextView);
@@ -65,16 +73,6 @@ public class DevicesManager extends ArrayAdapter {
             }
         });
 
-        deviceImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"Edit " + devices.get(position).getName(),Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
-        //deviceImageView.setImageResource(devices.get(position).getImage());
 
         if(devices.get(position).getImage() != null) {
             byte[] bytes = devices.get(position).getImage();
@@ -87,6 +85,13 @@ public class DevicesManager extends ArrayAdapter {
         deviceTopicTextView.setText(devices.get(position).getMqttTopic());
 
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity main = (MainActivity)getContext();
+                main.setCurrentDevice(devices.get(position));
+            }
+        });
 
         return convertView;
     }

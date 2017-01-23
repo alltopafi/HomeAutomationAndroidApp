@@ -49,10 +49,12 @@ public class DevicesFragment extends Fragment {
 
         adapter = new DevicesManager(getActivity(),R.layout.row_device,devices);
         lView.setAdapter(adapter);
-
+        lView.setItemsCanFocus(true);
 
         return view;
     }
+
+
 
 
 }

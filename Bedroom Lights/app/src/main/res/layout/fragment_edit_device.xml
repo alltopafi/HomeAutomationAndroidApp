@@ -1,13 +1,78 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
     tools:context="com.example.jesse.bedroomlight.fragments.EditDeviceFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="#FFFFFF">
+
+
+    <TextView
+        android:text="Edit Device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editDeviceNameTextField"
+        android:textSize="22dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="80dp"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:clickable="true"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="30dp"
+        app:srcCompat="@android:color/background_light"
+        android:id="@+id/editDeviceImageView" />
+
+    <EditText
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:text="Device Name"
+        android:id="@+id/editDeviceNameEditText"
+        android:maxLength="70"
+        android:maxLines="1"
+        android:background="#D3D3D3"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="150dp" />
+
+    <EditText
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:text="Device Topic"
+        android:id="@+id/editDeviceTopicEditText"
+        android:maxLength="70"
+        android:maxLines="1"
+        android:background="#D3D3D3"
+        android:layout_marginTop="180dp"
+        android:layout_marginLeft="150dp" />
+
+    <Button
+        android:text="Update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editDeviceUpdateButton"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="240dp"/>
+
+        <Button
+            android:text="Delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editDeviceDeleteButton"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="240dp"/>
+
+    </RelativeLayout>
+
 
 </FrameLayout>

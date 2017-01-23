@@ -1,5 +1,6 @@
 package com.example.jesse.bedroomlight;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.jesse.bedroomlight.fragments.AddDeviceFragment;
 import com.example.jesse.bedroomlight.fragments.DevicesFragment;
+import com.example.jesse.bedroomlight.fragments.EditDeviceFragment;
 import com.example.jesse.bedroomlight.fragments.HomeFragment;
 import com.example.jesse.bedroomlight.fragments.Settings;
 
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         DevicesFragment fragment = new DevicesFragment();
-        fragmentTransaction.add(R.id.mainFrame, fragment);
+        fragmentTransaction.add(R.id.mainFrame, fragment,"devices_fragment");
 
         //if if devices is the fragment in view we don't want to commit
 
@@ -123,6 +125,28 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
         mDrawerLayout.closeDrawer(Gravity.LEFT);
+    }
+
+    public void setCurrentDevice(Device device){
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        EditDeviceFragment fragment = new EditDeviceFragment();
+        Bundle bundle = new Bundle();
+
+        Fragment devicesFragment = fragmentManager.findFragmentByTag("devices_fragment");
+
+
+
+        bundle.putString("name",device.getName());
+        bundle.putString("topic",device.getMqttTopic());
+        bundle.putByteArray("image",device.getImage());
+        fragment.setArguments(bundle);
+
+
+        fragmentTransaction.add(R.id.mainFrame, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
