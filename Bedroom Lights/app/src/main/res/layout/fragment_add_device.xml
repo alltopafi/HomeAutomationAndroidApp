@@ -1,0 +1,72 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    tools:context="com.example.jesse.bedroomlight.fragments.AddDeviceFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/addDevice"
+            android:textSize="22dp"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="100dp"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageViewSelector"
+            android:layout_marginTop="140dp"
+            android:layout_marginLeft="30dp"
+            android:src="@mipmap/add_image"
+            android:clickable="true"
+            />
+
+        <EditText
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/deviceNameEditField"
+            android:inputType="text"
+            android:hint="Deivce Name"
+            android:maxLength="70"
+            android:maxLines="1"
+            android:background="#D3D3D3"
+            android:layout_marginTop="160dp"
+            android:layout_marginLeft="150dp"/>
+
+        <EditText
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/deviceTopicEditField"
+            android:hint="Device Topic String"
+            android:inputType="text"
+            android:maxLength="70"
+            android:maxLines="1"
+            android:background="#D3D3D3"
+            android:layout_marginTop="200dp"
+            android:layout_marginLeft="150dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/createDeviceButton"
+            android:text="Create Device"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="280dp"/>
+
+
+    </RelativeLayout>
+
+
+
+
+
+</FrameLayout>

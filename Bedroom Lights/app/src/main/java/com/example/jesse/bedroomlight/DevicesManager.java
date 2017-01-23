@@ -19,9 +19,14 @@ import java.util.List;
 
 public class DevicesManager extends ArrayAdapter {
 
+    public List<Device> getDevices() {
+        return devices;
+    }
+
     private List<Device> devices = new ArrayList<Device>();
     private int resource;
     private LayoutInflater inflater;
+
 
     public DevicesManager(Context context, int resource, List objects) {
         super(context, resource, objects);
@@ -47,16 +52,16 @@ public class DevicesManager extends ArrayAdapter {
             public void onClick(View v) {
                 PowerController powerController = new PowerController(getContext());
                 if(deviceSwitch.isChecked()){
-                    Toast.makeText(getContext(),devices.get(position).getName(),Toast.LENGTH_SHORT).show();
                     //turn on the device
                     powerController.pubOn(devices.get(position).getMqttTopic());
                 }else{
                     //turn off the device
-                    Toast.makeText(getContext(),devices.get(position).getMqttTopic(),Toast.LENGTH_SHORT).show();
                     powerController.pubOff(devices.get(position).getMqttTopic());
                 }
             }
         });
+
+
 
         deviceImageView.setImageResource(devices.get(position).getImage());
         deviceNameTextView.setText(devices.get(position).getName());
@@ -66,4 +71,7 @@ public class DevicesManager extends ArrayAdapter {
 
         return convertView;
     }
+
+
+
 }

@@ -2,7 +2,13 @@ package com.example.jesse.bedroomlight;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +16,12 @@ import android.os.Bundle;
 import android.view.Gravity;
 
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
+import com.example.jesse.bedroomlight.fragments.AddDeviceFragment;
 import com.example.jesse.bedroomlight.fragments.DevicesFragment;
 import com.example.jesse.bedroomlight.fragments.HomeFragment;
 import com.example.jesse.bedroomlight.fragments.Settings;
@@ -21,17 +30,25 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+import java.net.URI;
+import java.util.ArrayList;
+
+import static java.security.AccessController.getContext;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private MqttClient client;
+    private ArrayList<Device> devicesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        devicesList = new ArrayList<Device>();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawLayout);
         mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
@@ -45,14 +62,24 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        HomeFragment fragment = new HomeFragment();
+        DevicesFragment fragment = new DevicesFragment();
         fragmentTransaction.add(R.id.mainFrame, fragment);
         fragmentTransaction.commit();
 
 
-
     }
 
+
+    public void addDeviceButtonClicked(MenuItem item){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        AddDeviceFragment fragment = new AddDeviceFragment();
+        fragmentTransaction.add(R.id.mainFrame, fragment);
+        fragmentTransaction.commit();
+
+        mDrawerLayout.closeDrawer(Gravity.LEFT);
+    }
 
     public void homeButtonClicked(MenuItem item){
 
@@ -73,6 +100,10 @@ public class MainActivity extends AppCompatActivity {
 
         DevicesFragment fragment = new DevicesFragment();
         fragmentTransaction.add(R.id.mainFrame, fragment);
+
+        //if if devices is the fragment in view we don't want to commit
+
+
         fragmentTransaction.commit();
 
         mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -172,4 +203,11 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
+
+public ArrayList<Device> getDevicesList(){
+    return devicesList;
+}
+
+
+
 }
