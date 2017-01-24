@@ -107,9 +107,11 @@ public class AddDeviceFragment extends Fragment {
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(DeviceReaderContract.FeedEntry.TABLE_NAME, null, values);
 
-        Toast.makeText(getActivity(),"saved device",Toast.LENGTH_SHORT).show();
-
-        //TODO remove the fragment from view...show the devices fragment
+        DevicesFragment nextFrag= new DevicesFragment();
+        getFragmentManager().beginTransaction()
+                .replace(R.id.mainFrame, nextFrag,"devices_fragment")
+                .addToBackStack(null)
+                .commit();
     }
 
     private byte[] imageViewToByteArray(ImageView imageView){

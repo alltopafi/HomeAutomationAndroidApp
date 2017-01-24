@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         DevicesFragment fragment = new DevicesFragment();
-        fragmentTransaction.add(R.id.mainFrame, fragment);
+        fragmentTransaction.replace(R.id.mainFrame, fragment);
         fragmentTransaction.commit();
 
 
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         AddDeviceFragment fragment = new AddDeviceFragment();
-        fragmentTransaction.add(R.id.mainFrame, fragment);
+        fragmentTransaction.replace(R.id.mainFrame, fragment);
         fragmentTransaction.commit();
 
         mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         HomeFragment fragment = new HomeFragment();
-        fragmentTransaction.add(R.id.mainFrame, fragment);
+        fragmentTransaction.replace(R.id.mainFrame, fragment);
         fragmentTransaction.commit();
 
         mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         DevicesFragment fragment = new DevicesFragment();
-        fragmentTransaction.add(R.id.mainFrame, fragment,"devices_fragment");
+        fragmentTransaction.replace(R.id.mainFrame, fragment,"devices_fragment");
 
         // if devices is the fragment in view we don't want to commit
         fragmentTransaction.commit();
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         Settings fragment = new Settings();
-        fragmentTransaction.add(R.id.mainFrame, fragment,"settings_fragment");
+        fragmentTransaction.replace(R.id.mainFrame, fragment,"settings_fragment");
         fragmentTransaction.commit();
 
         mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         fragment.setArguments(bundle);
 
 
-        fragmentTransaction.add(R.id.mainFrame, fragment,"edit_device_fragment");
+        fragmentTransaction.replace(R.id.mainFrame, fragment,"edit_device_fragment");
         fragmentTransaction.commit();
     }
 
@@ -156,75 +156,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-//    public void pubOn(String topic){
-//        String payload = "1";
-//        try {
-//            client.publish(topic, payload.getBytes(),0,false);
-//        } catch (MqttException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void pubOff(String topic){
-//        String payload = "0";
-//        try {
-//           client.publish(topic, payload.getBytes(),0,false);
-//        } catch (MqttException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     @Override
     public void onResume(){
         super.onResume();
         // put your code here...
 
-//        setupConnection(this);
-
-
     }
-
-//    public void setupConnection(){
-//
-//
-//        SharedPreferences sharedPref = this.getSharedPreferences("AppInfo", MODE_PRIVATE);
-//
-//        String HOST_IP = sharedPref.getString("hostIPAddress","10.0.0.11");
-//        String HOST_Port = sharedPref.getString("portNumber","1883");
-//        String ClientID = sharedPref.getString("clientID","android_client1");
-//
-//
-//        try {
-//
-//            MemoryPersistence persistence = new MemoryPersistence();
-//            client = new MqttClient("tcp://" + HOST_IP + ":" + HOST_Port, ClientID, persistence);
-//            client.connect();
-//
-//            if(connect()) {
-//                Toast.makeText(MainActivity.this,"Connected",Toast.LENGTH_SHORT).show();
-//            }else{
-//                Toast.makeText(MainActivity.this,"failed",Toast.LENGTH_SHORT).show();
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//    }
-//
-//
-//    private boolean connect() {
-//        try {
-//
-//            String topics[] = {"ledStatus"};
-//            int qos[] = {1};
-//            client.subscribe(topics, qos);
-//            return true;
-//        } catch (MqttException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//    }
 
 public ArrayList<Device> getDevicesList(){
     devicesList = new ArrayList<Device>();

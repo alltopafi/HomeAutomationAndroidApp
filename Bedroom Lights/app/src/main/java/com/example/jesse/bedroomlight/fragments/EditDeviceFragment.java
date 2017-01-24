@@ -1,6 +1,8 @@
 package com.example.jesse.bedroomlight.fragments;
 
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -56,14 +58,20 @@ public class EditDeviceFragment extends Fragment {
         setInitView();
 
         updateButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if(updateButton()) {
-                    Toast.makeText(getActivity(), "Updated Device", Toast.LENGTH_SHORT).show();
+
+                    DevicesFragment nextFrag= new DevicesFragment();
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.mainFrame, nextFrag,"devices_fragment")
+                            .addToBackStack(null)
+                            .commit();
+
                 }else{
                     Toast.makeText(getActivity(), "Update Failed", Toast.LENGTH_SHORT).show();
                 }
-                //TODO remove the fragment from view
             }
         });
 
@@ -71,12 +79,16 @@ public class EditDeviceFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(deleteDevice()){
-                    Toast.makeText(getActivity(), "Deleted Device", Toast.LENGTH_SHORT).show();
+
+                    DevicesFragment nextFrag= new DevicesFragment();
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.mainFrame, nextFrag,"devices_fragment")
+                            .addToBackStack(null)
+                            .commit();
                 }else{
                     Toast.makeText(getActivity(), "Failed to Delete Device", Toast.LENGTH_SHORT).show();
                 }
             }
-            //TODO remove the fragment from view
         });
 
         deviceImage.setOnClickListener(new View.OnClickListener() {

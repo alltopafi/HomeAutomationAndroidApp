@@ -83,16 +83,11 @@ public class Settings extends Fragment {
                     e.printStackTrace();
                 }
 
-
-
-//                ((MainActivity) getActivity()).setupConnection();
-
-                FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
-
-                fragmentTransaction.remove(Settings.this);
-                fragmentTransaction.commit();
-
-
+                DevicesFragment nextFrag= new DevicesFragment();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.mainFrame, nextFrag,"devices_fragment")
+                        .addToBackStack(null)
+                        .commit();
 
             }
         });
