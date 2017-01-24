@@ -36,6 +36,7 @@ public class DevicesManager extends ArrayAdapter {
     private List<Device> devices = new ArrayList<Device>();
     private int resource;
     private LayoutInflater inflater;
+    private PowerController powerController;
 
 
     public DevicesManager(Context context, int resource, List objects) {
@@ -58,11 +59,11 @@ public class DevicesManager extends ArrayAdapter {
         TextView deviceNameTextView = (TextView)convertView.findViewById(R.id.deviceNameTextView);
         TextView deviceTopicTextView = (TextView)convertView.findViewById(R.id.deviceTopicTextView);
         final Switch deviceSwitch = (Switch)convertView.findViewById(R.id.deviceSwiitch);
+        powerController = new PowerController(getContext());
 
         deviceSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PowerController powerController = new PowerController(getContext());
                 if(deviceSwitch.isChecked()){
                     //turn on the device
                     powerController.pubOn(devices.get(position).getMqttTopic());

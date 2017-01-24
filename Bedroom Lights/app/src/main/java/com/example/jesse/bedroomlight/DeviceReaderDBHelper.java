@@ -14,8 +14,7 @@ public class DeviceReaderDBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "DeviceReader.db";
 
     private static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + DeviceReaderContract.FeedEntry.TABLE_NAME + " (" +
-            DeviceReaderContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
-            DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME + " TEXT," +
+            DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME + " TEXT PRIMARY KEY," +
             DeviceReaderContract.FeedEntry.COLUMN_NAME_TOPIC + " TEXT,"+
             DeviceReaderContract.FeedEntry.COLUMN_NAME_IMAGE + " BLOB)";
 

@@ -85,7 +85,7 @@ public class Settings extends Fragment {
 
 
 
-                ((MainActivity) getActivity()).setupConnection();
+//                ((MainActivity) getActivity()).setupConnection();
 
                 FragmentTransaction fragmentTransaction = getActivity().getFragmentManager().beginTransaction();
 

@@ -107,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
         DevicesFragment fragment = new DevicesFragment();
         fragmentTransaction.add(R.id.mainFrame, fragment,"devices_fragment");
 
-        //if if devices is the fragment in view we don't want to commit
-
-
+        // if devices is the fragment in view we don't want to commit
         fragmentTransaction.commit();
+
+
 
         mDrawerLayout.closeDrawer(Gravity.LEFT);
     }
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         Settings fragment = new Settings();
-        fragmentTransaction.add(R.id.mainFrame, fragment);
+        fragmentTransaction.add(R.id.mainFrame, fragment,"settings_fragment");
         fragmentTransaction.commit();
 
         mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -137,15 +137,13 @@ public class MainActivity extends AppCompatActivity {
 
         Fragment devicesFragment = fragmentManager.findFragmentByTag("devices_fragment");
 
-
-
         bundle.putString("name",device.getName());
         bundle.putString("topic",device.getMqttTopic());
         bundle.putByteArray("image",device.getImage());
         fragment.setArguments(bundle);
 
 
-        fragmentTransaction.add(R.id.mainFrame, fragment);
+        fragmentTransaction.add(R.id.mainFrame, fragment,"edit_device_fragment");
         fragmentTransaction.commit();
     }
 
@@ -156,30 +154,26 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
 
 
-
-
-
-    public void pubOn(String topic){
-        String payload = "1";
-        try {
-            client.publish(topic, payload.getBytes(),0,false);
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void pubOff(String topic){
-        String payload = "0";
-        try {
-           client.publish(topic, payload.getBytes(),0,false);
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void pubOn(String topic){
+//        String payload = "1";
+//        try {
+//            client.publish(topic, payload.getBytes(),0,false);
+//        } catch (MqttException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    public void pubOff(String topic){
+//        String payload = "0";
+//        try {
+//           client.publish(topic, payload.getBytes(),0,false);
+//        } catch (MqttException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public void onResume(){
@@ -191,48 +185,49 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setupConnection(){
-
-
-        SharedPreferences sharedPref = this.getSharedPreferences("AppInfo", MODE_PRIVATE);
-
-        String HOST_IP = sharedPref.getString("hostIPAddress","10.0.0.11");
-        String HOST_Port = sharedPref.getString("portNumber","1883");
-        String ClientID = sharedPref.getString("clientID","android_client1");
-
-
-        try {
-
-            MemoryPersistence persistence = new MemoryPersistence();
-            client = new MqttClient("tcp://" + HOST_IP + ":" + HOST_Port, ClientID, persistence);
-            client.connect();
-
-            if(connect()) {
-                Toast.makeText(MainActivity.this,"Connected",Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(MainActivity.this,"failed",Toast.LENGTH_SHORT).show();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-
-    private boolean connect() {
-        try {
-
-            String topics[] = {"ledStatus"};
-            int qos[] = {1};
-            client.subscribe(topics, qos);
-            return true;
-        } catch (MqttException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+//    public void setupConnection(){
+//
+//
+//        SharedPreferences sharedPref = this.getSharedPreferences("AppInfo", MODE_PRIVATE);
+//
+//        String HOST_IP = sharedPref.getString("hostIPAddress","10.0.0.11");
+//        String HOST_Port = sharedPref.getString("portNumber","1883");
+//        String ClientID = sharedPref.getString("clientID","android_client1");
+//
+//
+//        try {
+//
+//            MemoryPersistence persistence = new MemoryPersistence();
+//            client = new MqttClient("tcp://" + HOST_IP + ":" + HOST_Port, ClientID, persistence);
+//            client.connect();
+//
+//            if(connect()) {
+//                Toast.makeText(MainActivity.this,"Connected",Toast.LENGTH_SHORT).show();
+//            }else{
+//                Toast.makeText(MainActivity.this,"failed",Toast.LENGTH_SHORT).show();
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//    }
+//
+//
+//    private boolean connect() {
+//        try {
+//
+//            String topics[] = {"ledStatus"};
+//            int qos[] = {1};
+//            client.subscribe(topics, qos);
+//            return true;
+//        } catch (MqttException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
 
 public ArrayList<Device> getDevicesList(){
+    devicesList = new ArrayList<Device>();
     readDbForDevices(getApplicationContext());
     return devicesList;
 }
@@ -241,32 +236,15 @@ public ArrayList<Device> getDevicesList(){
         dbHelper = new DeviceReaderDBHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-// Define a projection that specifies which columns from the database
-// you will actually use after this query.
+        // Define a projection that specifies which columns from the database
+        // you will actually use after this query.
         String[] projection = {
-                DeviceReaderContract.FeedEntry._ID,
                 DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME,
                 DeviceReaderContract.FeedEntry.COLUMN_NAME_TOPIC,
                 DeviceReaderContract.FeedEntry.COLUMN_NAME_IMAGE
         };
 
-// Filter results WHERE "title" = 'My Title'
-//        String selection = DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME + " = ?";
-//        String[] selectionArgs = { "%" };
-
-// How you want the results sorted in the resulting Cursor
-        String sortOrder =
-                DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME + " DESC";
-
-        Cursor cursor = db.query(
-                DeviceReaderContract.FeedEntry.TABLE_NAME,                     // The table to query
-                projection,                               // The columns to return
-                null,                                // The columns for the WHERE clause
-                null,                            // The values for the WHERE clause
-                null,                                     // don't group the rows
-                null,                                     // don't filter by row groups
-                sortOrder                                 // The sort order
-        );
+        Cursor cursor = db.query(DeviceReaderContract.FeedEntry.TABLE_NAME, projection, null, null, null, null, null);
 
         while(cursor.moveToNext()) {
             String name = cursor.getString(cursor.getColumnIndexOrThrow(DeviceReaderContract.FeedEntry.COLUMN_NAME_NAME));
@@ -275,13 +253,16 @@ public ArrayList<Device> getDevicesList(){
             devicesList.add(new Device(name, topic,image));
         }
         cursor.close();
-
     }
 
     @Override
     protected void onDestroy() {
         dbHelper.close();
         super.onDestroy();
+    }
+
+    public void closedb(){
+        dbHelper.close();
     }
 
 }

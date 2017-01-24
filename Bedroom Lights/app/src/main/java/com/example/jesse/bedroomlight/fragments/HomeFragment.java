@@ -37,36 +37,36 @@ public class HomeFragment extends Fragment {
 
         context = getActivity();
 
-        ((MainActivity) getActivity()).setupConnection();
+//        ((MainActivity) getActivity()).setupConnection();
 
 
 
 
-        ToggleButton toggle = (ToggleButton) view.findViewById(R.id.bedsideLightToggle);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // The toggle is enabled
-                    ((MainActivity)getActivity()).pubOn("ledStatus");
-                } else {
-                    // The toggle is disabled
-                    ((MainActivity)getActivity()).pubOff("ledStatus");
-                }
-            }
-        });
+//        ToggleButton toggle = (ToggleButton) view.findViewById(R.id.bedsideLightToggle);
+//        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    // The toggle is enabled
+//                    ((MainActivity)getActivity()).pubOn("ledStatus");
+//                } else {
+//                    // The toggle is disabled
+//                    ((MainActivity)getActivity()).pubOff("ledStatus");
+//                }
+//            }
+//        });
 
-        ToggleButton toggle2 = (ToggleButton) view.findViewById(R.id.mainLightToggle);
-        toggle2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // The toggle is enabled
-                    ((MainActivity)getActivity()).pubOn("bedroom/light/main");
-                } else {
-                    // The toggle is disabled
-                    ((MainActivity)getActivity()).pubOff("bedroom/light/main");
-                }
-            }
-        });
+//        ToggleButton toggle2 = (ToggleButton) view.findViewById(R.id.mainLightToggle);
+//        toggle2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if (isChecked) {
+//                    // The toggle is enabled
+//                    ((MainActivity)getActivity()).pubOn("bedroom/light/main");
+//                } else {
+//                    // The toggle is disabled
+//                    ((MainActivity)getActivity()).pubOff("bedroom/light/main");
+//                }
+//            }
+//        });
 
 
 
